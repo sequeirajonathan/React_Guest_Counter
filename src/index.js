@@ -30,9 +30,15 @@ class App extends React.Component {
     }
 
     resetCount = () => {
-        this.setState({
-            counter: 0
-        })
+        let confirmation = prompt('Are you sure you want to reset the guest counter?');
+        if (confirmation.toLocaleLowerCase().includes("y")) {
+            this.setState({
+                counter: 0
+            })
+        } else {
+            return;
+        }
+ 
     }
 
     render() {
