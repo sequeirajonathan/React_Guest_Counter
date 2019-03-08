@@ -1,12 +1,68 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Door from './Door';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+
+class App extends React.Component {
+    state = {
+        counter: 0,
+    }
+
+    addGuest = () => {
+        let { counter } = this.state;
+        counter++;
+        this.setState({
+            counter
+        })
+    }
+
+    removeGuest = () => {
+        let { counter } = this.state;
+
+        if (counter <= 0) {
+            counter = 0;
+        } else {
+            counter--;
+            this.setState({
+                counter
+            })
+        }
+    }
+
+    resetCount = () => {
+        this.setState({
+            counter: 0
+        })
+    }
+
+    render() {
+        let { counter } = this.state;
+        return (
+            <div>
+                <Door>
+                    <div className="buttonContainer">
+                        <div className="ui large buttons">
+                            <button id="reset" onClick={this.resetCount} class="negative ui button">Reset</button>
+                            <button onClick={this.removeGuest} className="ui button">-</button>
+                            <div className="or" />
+                            <button onClick={this.addGuest} className="ui button">+</button>
+                            <div className="ui compact menu">
+                                <div className="item">
+                                    <i className="icon users" />Guests<div className="floating ui teal label">{counter}</div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </Door>
+
+            </div>
+        )
+    }
+}
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
